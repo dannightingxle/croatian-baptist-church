@@ -105,17 +105,36 @@ function rm_church_setting( $key, $fallback = '' ) {
 
 /** Get a translated page URL for the language switcher. */
 function rm_church_translated_url( $lang ) {
-	if ( function_exists( 'pll_current_language' ) && function_exists( 'pll_get_post' ) ) {
-		$current_id  = get_queried_object_id();
-		if ( $current_id ) {
-			$translated = pll_get_post( $current_id, $lang );
-			if ( $translated ) {
-				return get_permalink( $translated );
-			}
+	if ( ! function_exists( 'pll_current_language' ) ) {
+		return home_url( '/' );
+	}
+
+	$current_id = get_queried_object_id();
+	$front_id   = (int) get_option( 'page_on_front' );
+
+	// On the front page (or any of its translations), link to the language's
+	// home URL — Polylang serves the right translation at /, /en/, etc.
+	// Using get_permalink() on a translation would give /en/home/ which is
+	// a different (regular-page) route and doesn't use front-page.php.
+	if ( $current_id && $front_id ) {
+		$front_translations = function_exists( 'pll_get_post_translations' )
+			? pll_get_post_translations( $front_id )
+			: [];
+		if ( in_array( $current_id, $front_translations, true ) || $current_id === $front_id ) {
+			return function_exists( 'pll_home_url' ) ? pll_home_url( $lang ) : home_url( '/' );
 		}
-		if ( function_exists( 'pll_home_url' ) ) {
-			return pll_home_url( $lang );
+	}
+
+	// Otherwise, follow the explicit translation of the current page.
+	if ( $current_id && function_exists( 'pll_get_post' ) ) {
+		$translated = pll_get_post( $current_id, $lang );
+		if ( $translated ) {
+			return get_permalink( $translated );
 		}
+	}
+
+	if ( function_exists( 'pll_home_url' ) ) {
+		return pll_home_url( $lang );
 	}
 	return home_url( '/' );
 }
