@@ -1,13 +1,13 @@
-# WordPress core (managed by Docker / Bedrock / hosting)
-wordpress/
-wp-admin/
-wp-includes/
-wp-*.php
-!wp-config-sample.php
-index.php
-license.txt
-readme.html
-xmlrpc.php
+# WordPress core (anchored to repo root so we don't catch theme files of the same name)
+/wordpress/
+/wp-admin/
+/wp-includes/
+/wp-*.php
+!/wp-config-sample.php
+/index.php
+/license.txt
+/readme.html
+/xmlrpc.php
 
 # WP-content: track our theme + plugin, ignore everything else
 wp-content/*
