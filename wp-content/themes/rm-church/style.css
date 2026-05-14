@@ -1,0 +1,28 @@
+/*
+Theme Name: RM Church
+Theme URI:
+Description: Custom child theme for the Croatian Baptist Church website. Built on Hello Elementor. Designed to be edited via Elementor by non-technical users.
+Author: Dan Nightingale
+Version: 0.1.0
+Template: hello-elementor
+Text Domain: rm-church
+*/
+
+/* All styling is intentionally minimal here — we let Elementor handle visuals.
+   Use this file only for small global tweaks that can't be done in Elementor's
+   theme settings. */
+
+/* Smooth scroll for in-page links */
+html { scroll-behavior: smooth; }
+
+/* A subtle focus ring for keyboard users (a11y) */
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Hide WP admin bar bump on small screens for cleaner mobile preview */
+@media screen and (max-width: 600px) {
+  html { margin-top: 0 !important; }
+  #wpadminbar { display: none; }
+}

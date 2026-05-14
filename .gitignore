@@ -1,0 +1,48 @@
+# WordPress core (managed by Docker / Bedrock / hosting)
+wordpress/
+wp-admin/
+wp-includes/
+wp-*.php
+!wp-config-sample.php
+index.php
+license.txt
+readme.html
+xmlrpc.php
+
+# WP-content: track our theme + plugin, ignore everything else
+wp-content/*
+!wp-content/themes/
+!wp-content/plugins/
+wp-content/themes/*
+!wp-content/themes/rm-church/
+wp-content/plugins/*
+!wp-content/plugins/rm-church-customizations/
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/backup-db/
+wp-content/backups/
+wp-content/blogs.dir/
+
+# Env + secrets
+.env
+.env.local
+*.sql
+*.sql.gz
+backups/
+
+# Docker
+.docker-data/
+wp-data/
+db-data/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Node (if we ever add build tooling for theme assets)
+node_modules/
+dist/
+.cache/
